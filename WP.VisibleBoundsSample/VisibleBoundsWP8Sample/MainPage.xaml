@@ -1,0 +1,35 @@
+﻿<phone:PhoneApplicationPage x:Class="VisibleBoundsWP8Sample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="appbar_button.png" Text="button"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <Border x:Name="LayoutRoot" Background="Transparent" BorderBrush="#FF207828" BorderThickness="5">
+        <Grid x:Name="ContentPanel">
+            <TextBlock x:Name="Left" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBlock x:Name="Right" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+                <TextBlock x:Name="Top" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                <Button x:Name="ToggleStatus" Content="Toggle Status bar" Click="ToggleStatusClick"/>
+                <Button x:Name="ToggleAppBar" Content="Toggle AppBar" Click="ToggleAppBarClick"/>
+                <TextBox TextWrapping="Wrap" Text="Tap for keyboard"/>
+                <TextBlock x:Name="Bottom" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+    </Border>
+
+</phone:PhoneApplicationPage>

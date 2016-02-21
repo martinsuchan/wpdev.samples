@@ -1,0 +1,132 @@
+﻿<Page x:Class="WinSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:WinSample.Converters"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance local:ControllersModel}">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Name="BoolToVisibility" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Canvas x:Name="PlayCanvas">
+
+            <Rectangle Fill="Gray" x:Name="Bg"/>
+
+            <Image Height="100" Width="100"
+                Canvas.Left="{Binding Controller1.PlayerLeft}" RenderTransformOrigin="0.5,0.5"
+                Canvas.Top="{Binding Controller1.PlayerTop}" Source="Assets/tank2_body.png" Stretch="None"
+                Visibility="{Binding Controller1.PlayerAlive, Converter={StaticResource BoolToVisibility}}">
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="{Binding Controller1.LeftThumb}"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Height="100" Width="100"
+                Canvas.Left="{Binding Controller1.PlayerLeft}"
+                Canvas.Top="{Binding Controller1.PlayerTop}"
+                RenderTransformOrigin="0.5,0.5" Source="Assets/tank2_dualgun.png" Stretch="None"
+                Visibility="{Binding Controller1.PlayerAlive, Converter={StaticResource BoolToVisibility}}">
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="{Binding Controller1.RightThumb}"/>
+                </Image.RenderTransform>
+            </Image>
+            <Grid Height="100" Width="100"
+                Canvas.Left="{Binding Controller1.ShotLeft}"
+                Canvas.Top="{Binding Controller1.ShotTop}"
+                RenderTransformOrigin="0.5,0.5"
+                Visibility="{Binding Controller1.ShotActive, Converter={StaticResource BoolToVisibility}}">
+                <Ellipse Fill="Red" Width="25" Height="25"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+
+            <Image Height="100" Width="100"
+                Canvas.Left="{Binding Controller2.PlayerLeft}" RenderTransformOrigin="0.5,0.5"
+                Canvas.Top="{Binding Controller2.PlayerTop}" Source="Assets/tank2_body.png" Stretch="None"
+                Visibility="{Binding Controller2.PlayerAlive, Converter={StaticResource BoolToVisibility}}">
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="{Binding Controller2.LeftThumb}"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Height="100" Width="100"
+                Canvas.Left="{Binding Controller2.PlayerLeft}"
+                Canvas.Top="{Binding Controller2.PlayerTop}"
+                RenderTransformOrigin="0.5,0.5" Source="Assets/tank2_dualgun.png" Stretch="None"
+                Visibility="{Binding Controller2.PlayerAlive, Converter={StaticResource BoolToVisibility}}">
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="{Binding Controller2.RightThumb}"/>
+                </Image.RenderTransform>
+            </Image>
+            <Grid Height="100" Width="100"
+                Canvas.Left="{Binding Controller2.ShotLeft}"
+                Canvas.Top="{Binding Controller2.ShotTop}"
+                RenderTransformOrigin="0.5,0.5"
+                Visibility="{Binding Controller2.ShotActive, Converter={StaticResource BoolToVisibility}}">
+                <Ellipse Fill="Blue" Width="25" Height="25"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+
+        </Canvas>
+
+        <TextBlock x:Name="DetectedBlock" Grid.Column="0" Style="{StaticResource SubheaderTextBlockStyle}" Margin="25,25,25,0" />
+
+        <!--<Canvas x:Name="InteractiveCanvas" Grid.Column="1" Margin="80" >
+            <Image Source="xbox_360_controller-small.png" Width="900" Height="600"/>
+
+            <Rectangle x:Name="LeftTrigger" Fill="#FFFF8000" Height="{Binding Controller1.LeftTrigger}"
+                Canvas.Left="187" Canvas.Top="38" Width="50"/>
+            <Rectangle x:Name="LeftBumper" Fill="#FFFF8000" Height="36" Canvas.Left="108" Canvas.Top="119" Width="150"
+                Visibility="{Binding Controller1.LeftBumper, Converter={StaticResource BoolToVisibility}}"/>
+            <Rectangle x:Name="RightTrigger" Fill="#FFFF8000" Height="{Binding Controller1.RightTrigger}" Canvas.Left="672" Canvas.Top="38" Width="50"/>
+            <Rectangle x:Name="RightBumper" Fill="#FFFF8000" Height="36" Canvas.Left="645" Canvas.Top="119" Width="150"
+                Visibility="{Binding Controller1.RightBumper, Converter={StaticResource BoolToVisibility}}"/>
+            
+            <Ellipse x:Name="BackButton" Fill="#FFFF8000" Height="36" Canvas.Left="337" Canvas.Top="284" Width="35"
+                Visibility="{Binding Controller1.Back, Converter={StaticResource BoolToVisibility}}"/>
+            <Ellipse x:Name="StartButton" Fill="#FFFF8000" Height="36" Canvas.Left="532" Canvas.Top="284" Width="35"
+                Visibility="{Binding Controller1.Start, Converter={StaticResource BoolToVisibility}}"/>
+            <Ellipse x:Name="GuideButton" Fill="#FFFF8000" Height="79" Canvas.Left="411" Canvas.Top="265" Width="80"
+                Visibility="Collapsed"/>
+            
+            <Ellipse x:Name="XButton" Fill="#FFFF8000" Height="54" Canvas.Left="619" Canvas.Top="273" Width="54"
+                Visibility="{Binding Controller1.X, Converter={StaticResource BoolToVisibility}}"/>
+            <Ellipse x:Name="YButton" Fill="#FFFF8000" Height="54" Canvas.Left="694" Canvas.Top="215" Width="54"
+                Visibility="{Binding Controller1.Y, Converter={StaticResource BoolToVisibility}}"/>
+            <Ellipse x:Name="AButton" Fill="#FFFF8000" Height="54" Canvas.Left="686" Canvas.Top="330" Width="54"
+                Visibility="{Binding Controller1.A, Converter={StaticResource BoolToVisibility}}"/>
+            <Ellipse x:Name="BButton" Fill="#FFFF8000" Height="54" Canvas.Left="761" Canvas.Top="269" Width="54"
+                Visibility="{Binding Controller1.B, Converter={StaticResource BoolToVisibility}}"/>
+            
+            <Rectangle x:Name="UpPad" Fill="#FFFF8000" Height="35" Canvas.Left="295" Canvas.Top="387" Width="35"
+                Visibility="{Binding Controller1.DpadUp, Converter={StaticResource BoolToVisibility}}"/>
+            <Rectangle x:Name="DownPad" Fill="#FFFF8000" Height="35" Canvas.Left="300" Canvas.Top="466" Width="35"
+                Visibility="{Binding Controller1.DpadDown, Converter={StaticResource BoolToVisibility}}"/>
+            <Rectangle x:Name="LeftPad" Fill="#FFFF8000" Height="35" Canvas.Left="248" Canvas.Top="428" Width="35"
+                Visibility="{Binding Controller1.DpadLeft, Converter={StaticResource BoolToVisibility}}"/>
+            <Rectangle x:Name="RightPad" Fill="#FFFF8000" Height="35" Canvas.Left="347" Canvas.Top="422" Width="35"
+                Visibility="{Binding Controller1.DpadRight, Converter={StaticResource BoolToVisibility}}"/>
+
+            <Rectangle x:Name="LeftStick" Height="{Binding Controller1.LeftThumbForce}" Margin="{Binding Controller1.LeftThumbMargin}"
+                Canvas.Left="177" StrokeStartLineCap="Triangle"
+                StrokeThickness="4" Canvas.Top="135" Width="5" Fill="#FFFF8000" RenderTransformOrigin="0.5,1">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="{Binding Controller1.LeftThumb}"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="RightStick" Height="{Binding Controller1.RightThumbForce}" Margin="{Binding Controller1.RightThumbMargin}"
+                Canvas.Left="573" StrokeStartLineCap="Triangle"
+                StrokeThickness="4" Canvas.Top="265" Width="5" Fill="#FFFF8000" RenderTransformOrigin="0.5,1">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="{Binding Controller1.RightThumb}"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </Canvas>-->
+    </Grid>
+</Page>
